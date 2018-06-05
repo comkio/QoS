@@ -14,14 +14,12 @@ public class Dropper extends Thread {
 
     private Integer listen_port;
     private Integer queue_length;
-    private String type;
     private final LinkedList<String> queue;
 
-    public Dropper(Integer listen_port, Integer queue_length, LinkedList<String> queue, String type) {
+    public Dropper(Integer listen_port, Integer queue_length, LinkedList<String> queue) {
         this.listen_port = listen_port;
         this.queue_length = queue_length;
         this.queue = queue;
-        this.type = type;
     }
 
     public void run() {
@@ -43,17 +41,17 @@ public class Dropper extends Thread {
                 // Implement a dropping stratergy. This should ideally be from your last lab session.
                 if (queue_length == 0) {
                     queue.add(sentence);
-                    System.out.println("[DROPPER " + type + "] Packet added (" + queue.size() + "/∞)");
+                    System.out.println("Packet added (" + queue.size() + "/∞)");
                 } else if (queue.size() < queue_length) {
                     queue.add(sentence);
-                    System.out.println("[DROPPER " + type + "] Packet added (" + queue.size() + "/" + queue_length + ")");
+                    System.out.println("Packet added (" + queue.size() + "/" + queue_length + ")");
                 } else {
                     String[] received = sentence.split(" ");
                     long ID_P = Long.parseLong(received[0]);
-                    System.out.println("[DROPPER " + type + "] Packet Dropped: " + ID_P);
+                    System.out.println("Packet Dropped: " + ID_P);
                     dropped++;
                 }
-                System.out.println("[DROPPER " + type + "] Number of dropped packets: " + dropped);
+                System.out.println("Number of dropped packets: " + dropped);
                 System.out.println("***********************************************");
             }
         } catch (SocketException ex) {
