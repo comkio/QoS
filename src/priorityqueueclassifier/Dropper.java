@@ -21,7 +21,7 @@ public class Dropper extends Thread {
         this.queue_length = queue_length;
         this.queue = queue;
     }
-
+//Eliminar el tipus de paquets, el dropper dropeja indistintament del tipus de paquet
     public void run() {
         try {
             DatagramSocket serverSocket = new DatagramSocket(listen_port);
