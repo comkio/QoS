@@ -23,7 +23,7 @@ public class PriorityQueueClassifier {
     public static void main(String args[]) throws Exception {
 
         // Destination port, listening ports, and queue lengths
-        int send_port, listen_portQ1, lengthQ1, listen_portQ2, lengthQ2;
+        int send_port, listen_portQ1, lengthQ1, listen_portQ2, lengthQ2, listen_portQ3, lengthQ3;
         // Generation rate (mu)
         double mu;
 
@@ -39,6 +39,10 @@ public class PriorityQueueClassifier {
         listen_portQ2 = Integer.parseInt(llegir.readLine());
         System.out.println("[QUEUE] Length of Queue 2?");
         lengthQ2 = Integer.parseInt(llegir.readLine());
+        listen_portQ3 = Integer.parseInt(llegir.readLine());
+        System.out.println("[QUEUE] Length of Queue 2?");
+        lengthQ3 = Integer.parseInt(llegir.readLine());
+        
         System.out.println("[QUEUE] Output traffic (packets per second)?");
         mu = Integer.parseInt(llegir.readLine());
         mu = mu / 1000;
@@ -49,12 +53,14 @@ public class PriorityQueueClassifier {
         final LinkedList<String> queue3 = new LinkedList<>();
 
         Scheduler sch = new Scheduler(queue1, queue2, queue3, send_port, mu);
-        Dropper d1 = new Dropper(listen_portQ1, lengthQ1, queue1, "H");
-        Dropper d2 = new Dropper(listen_portQ2, lengthQ2, queue2, "L");
+        Dropper d1 = new Dropper(listen_portQ1, lengthQ1, queue1);
+        Dropper d2 = new Dropper(listen_portQ2, lengthQ2, queue2);
+        Dropper d3 = new Dropper(listen_portQ3, lengthQ3, queue3);
 
         sch.start();
         d1.start();
         d2.start();
+        d3.start();
     }
 
 }
