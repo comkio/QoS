@@ -60,16 +60,9 @@ public class Client {
 
             //current system time in milliseconds
             timestamp = System.currentTimeMillis();
-            
-            // Computation of current packet priority according to previously set "High Priority" percentage (Hpr)
-            if ((Math.random() * 100) < Hpr) {
-                priority = 1;
-            } else {
-                priority = 2;
-            }
-            
+       
             //information within the String
-            sending = packet_id + " " + timestamp + " " + priority + " \n";
+            sending = packet_id + " " + timestamp + " " + " \n";
             //Encoding String into a sequence of bytes, charset, here system default charset UTP-8
             sendData = sending.getBytes();
             DatagramPacket sendPacket = new DatagramPacket(sendData, sendData.length, IPAddress, send_port);
@@ -78,13 +71,7 @@ public class Client {
             System.out.println("[CLIENT] New packet sent at " + System.currentTimeMillis());
             System.out.println("[CLIENT] Sending Packet ID: " + packet_id);
 
-            if (priority == 1) {
-                System.out.println("[CLIENT] Packet priority: HIGH (1)");
-                packet_pr[0]++;
-            } else {
-                System.out.println("[CLIENT] Packet priority: LOW (2)");
-                packet_pr[1]++;
-            }
+
             System.out.println("[CLIENT] Total sent packets - HIGH: " + packet_pr[0] + " LOW: " + packet_pr[1]);
 
             //increment packet ids
