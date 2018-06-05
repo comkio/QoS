@@ -46,8 +46,9 @@ public class PriorityQueueClassifier {
 
         final LinkedList<String> queue1 = new LinkedList<>();
         final LinkedList<String> queue2 = new LinkedList<>();
+        final LinkedList<String> queue3 = new LinkedList<>();
 
-        Scheduler sch = new Scheduler(queue1, queue2, send_port, mu);
+        Scheduler sch = new Scheduler(queue1, queue2, queue3, send_port, mu);
         Dropper d1 = new Dropper(listen_portQ1, lengthQ1, queue1, "H");
         Dropper d2 = new Dropper(listen_portQ2, lengthQ2, queue2, "L");
 
