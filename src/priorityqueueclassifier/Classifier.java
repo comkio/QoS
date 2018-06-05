@@ -12,7 +12,7 @@ public class Classifier {
     public static void main(String args[]) throws Exception {
 
         // Listening port and destination ports
-        int listen_port, send_port1, send_port2;
+        int listen_port, send_port1, send_port2, send_port3;
 
         // Packet priority level 
         Integer priority;
@@ -24,10 +24,12 @@ public class Classifier {
         BufferedReader llegir = new BufferedReader(new InputStreamReader(System.in));
         System.out.println("[CLASSIFIER] Listen Port?");
         listen_port = Integer.parseInt(llegir.readLine());
-        System.out.println("[CLASSIFIER] Send Port 1 (High priority)?");
+        System.out.println("[CLASSIFIER] Send Port queue 1?");
         send_port1 = Integer.parseInt(llegir.readLine());
-        System.out.println("[CLASSIFIER] Send Port 2 (Low priority)?");
+        System.out.println("[CLASSIFIER] Send Port queue 2?");
         send_port2 = Integer.parseInt(llegir.readLine());
+        System.out.println("[CLASSIFIER] Send Port queue 3?");
+        send_port3 = Integer.parseInt(llegir.readLine());
 
         DatagramSocket ListenSocket = new DatagramSocket(listen_port);
         DatagramSocket SendSocket = new DatagramSocket();
@@ -39,10 +41,14 @@ public class Classifier {
             DatagramPacket receivePacket = new DatagramPacket(receiveData, receiveData.length);
             ListenSocket.receive(receivePacket);
 
-            String sentence = new String(receivePacket.getData());
-            String[] received_lines = sentence.split(" ");
-            priority = Integer.parseInt(received_lines[2]);
+            //String sentence = new String(receivePacket.getData());
+            //String[] received_lines = sentence.split(" ");
+            //priority = Integer.parseInt(received_lines[2]);
 
+            DatagramPacket sendPacket = new DatagramPacket(receiveData, receiveData.length, IPAddress, send_port1);
+            SendSocket.send(sendPacket);
+            
+            /*
             if (priority == 1) {
                 DatagramPacket sendPacket = new DatagramPacket(receiveData, receiveData.length, IPAddress, send_port1);
                 SendSocket.send(sendPacket);
@@ -54,10 +60,11 @@ public class Classifier {
                 System.out.println("[CLASSIFIER] Packet priority: LOW (0)");
                 packet_pr[1]++;
             }
-
+            
             System.out.println("[CLASSIFIER] Total sent packets - "
                     + "HIGH: " + packet_pr[0] + " LOW: " + packet_pr[1] + " TOTAL: " + (packet_pr[0] + packet_pr[1]));
             System.out.println("***********************************************");
+            */
         }
 
     }
