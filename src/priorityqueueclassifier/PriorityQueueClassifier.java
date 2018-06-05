@@ -39,8 +39,9 @@ public class PriorityQueueClassifier {
         listen_portQ2 = Integer.parseInt(llegir.readLine());
         System.out.println("[QUEUE] Length of Queue 2?");
         lengthQ2 = Integer.parseInt(llegir.readLine());
+        System.out.println("[QUEUE] Listen Port of Queue 3?");       
         listen_portQ3 = Integer.parseInt(llegir.readLine());
-        System.out.println("[QUEUE] Length of Queue 2?");
+        System.out.println("[QUEUE] Length of Queue 3?");
         lengthQ3 = Integer.parseInt(llegir.readLine());
         
         System.out.println("[QUEUE] Output traffic (packets per second)?");
